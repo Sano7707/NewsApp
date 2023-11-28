@@ -2,6 +2,7 @@ package com.loc.newsapp.presentation.onboarding
 
 import androidx.annotation.DrawableRes
 import com.loc.newsapp.R
+import com.loc.newsapp.util.Constants
 
 data class Page(
     val title: String,
@@ -11,18 +12,18 @@ data class Page(
 
 val pages = listOf(
     Page(
-        title = "Israel-Hamas war live: Israeli army continues ‘pounding’ southern Gaza",
-        description = "About 31 Palestinians have been killed in separate strikes that took place at the Nuseirat ... ",
+        title = Constants.FIRST_TITLE,
+        description = Constants.description1,
         image = R.drawable.first
     ),
     Page(
-        title = "US and China to resume high-level military communication",
-        description = "US President Joe Biden and Chinese leader Xi Jinping have agreed to resume high-level ...",
+        title = Constants.SECOND_TITLE,
+        description = Constants.description2,
         image = R.drawable.second
     ),
     Page(
-        title = "Armenia and Azerbaijan have agreed on basic peace treaty principles",
-        description = "The two countries have been at odds for decades, most notably over the breakaway region of ... ",
+        title = Constants.THIRD_TITLE,
+        description =  Constants.description3,
         image = R.drawable.third
     )
 )

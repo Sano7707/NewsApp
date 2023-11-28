@@ -1,6 +1,7 @@
 package com.loc.newsapp.presentation.onboarding
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,12 +14,15 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.loc.newsapp.presentation.Dimens.MediumPadding2
 import com.loc.newsapp.presentation.common.NewsButton
 import com.loc.newsapp.presentation.common.NewsTextButton
@@ -28,7 +32,17 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(
+    onEvent: (OnBoardingEvent) -> Unit
+) {
+    val isSystemInDarkMode = isSystemInDarkTheme()
+    val systemUiColor = rememberSystemUiController()
+    SideEffect {
+        systemUiColor.setSystemBarsColor(
+            color = Color.Black.copy(0.1f),
+            darkIcons = isSystemInDarkMode
+        )
+    }
     Column(modifier = Modifier.fillMaxSize()) {
         val pagerState = rememberPagerState(initialPage = 0) {
             pages.size
@@ -63,7 +77,7 @@ fun OnBoardingScreen() {
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 val scope = rememberCoroutineScope()
-                //Hiding the button when the first element of the list is empty
+                //Hide the button when the first element of the list is empty
                 if (buttonsState.value[0].isNotEmpty()) {
                     NewsTextButton(
                         text = buttonsState.value[0],
@@ -81,9 +95,9 @@ fun OnBoardingScreen() {
                     text = buttonsState.value[1],
                     onClick = {
                         scope.launch {
-                            if (pagerState.currentPage == 3){
-                                //TODO Navigate to the main screen and save a value in datastore preferences
-                            }else{
+                            if (pagerState.currentPage == 2) {
+                                onEvent(OnBoardingEvent.SaveAppEntry)
+                            } else {
                                 pagerState.animateScrollToPage(
                                     page = pagerState.currentPage + 1
                                 )
