@@ -10,5 +10,6 @@ object Constants {
     const val description1 = "About 31 Palestinians have been killed in separate strikes that took place at the Nuseirat ... "
     const val description2 = "US President Joe Biden and Chinese leader Xi Jinping have agreed to resume high-level ..."
     const val description3 = "The two countries have been at odds for decades, most notably over the breakaway region of ... "
-
+    const val API_KEY = "d8fc44033dad4f30870ca3a5fb33c8d6"
+    const val BASE_URL = "https://newsapi.org/v2/"
 }
