@@ -1,4 +1,4 @@
-package com.loc.newsapp.presentation.mainActivity
+package com.loc.newsapp.presentation.mainactivity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -18,7 +18,6 @@ import com.loc.newsapp.presentation.navgraph.NavGraph
 import com.loc.newsapp.ui.theme.NewsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
-//TODO: Use the accompanist library to change the colors of the status bar
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
