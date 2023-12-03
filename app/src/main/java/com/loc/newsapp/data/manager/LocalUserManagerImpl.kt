@@ -16,6 +16,13 @@ class LocalUserMangerImpl(
     private val context: Context
 ) : LocalUserManager {
 
+    private val readOnlyProperty = preferencesDataStore(name = USER_SETTINGS)
+
+    val Context.dataStore: DataStore<Preferences> by readOnlyProperty
+
+    private object PreferenceKeys {
+        val APP_ENTRY = booleanPreferencesKey(Constants.APP_ENTRY)
+    }
     override suspend fun saveAppEntry() {
         context.dataStore.edit { settings ->
             settings[PreferenceKeys.APP_ENTRY] = true
@@ -29,10 +36,3 @@ class LocalUserMangerImpl(
     }
 }
 
-private val readOnlyProperty = preferencesDataStore(name = USER_SETTINGS)
-
-val Context.dataStore: DataStore<Preferences> by readOnlyProperty
-
-private object PreferenceKeys {
-    val APP_ENTRY = booleanPreferencesKey(Constants.APP_ENTRY)
-}
