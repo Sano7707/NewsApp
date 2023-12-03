@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
@@ -17,11 +18,11 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.loc.newsapp.presentation.navgraph.NavGraph
 import com.loc.newsapp.ui.theme.NewsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -31,16 +32,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             NewsAppTheme(dynamicColor = false) {
                 val isSystemInDarkMode = isSystemInDarkTheme()
-                val systemController = rememberSystemUiController()
-
+                val systemUiColor = rememberSystemUiController()
                 SideEffect {
-                    systemController.setSystemBarsColor(
+                    systemUiColor.setSystemBarsColor(
                         color = Color.Transparent,
                         darkIcons = !isSystemInDarkMode
                     )
                 }
-
-                Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
+                Box(modifier = Modifier.background(MaterialTheme.colorScheme.background).fillMaxSize()) {
                     NavGraph(startDestination = viewModel.startDestination.value)
                 }
             }
