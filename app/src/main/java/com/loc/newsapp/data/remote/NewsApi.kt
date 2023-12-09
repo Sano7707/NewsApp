@@ -1,7 +1,6 @@
-package com.loc.newsapp.data.manager.remote
+package com.loc.newsapp.data.remote
 
-
-import com.loc.newsapp.data.manager.remote.dto.NewsResponse
+import com.loc.newsapp.data.remote.dto.NewsResponse
 import com.loc.newsapp.util.Constants.API_KEY
 import retrofit2.http.GET
 import retrofit2.http.Query

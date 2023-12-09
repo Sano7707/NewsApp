@@ -1,7 +1,6 @@
-package com.loc.newsapp.domain.manager.usecases.app_entry
+package com.loc.newsapp.domain.usecases.app_entry
 
-import com.loc.newsapp.domain.manager.manager.LocalUserManager
-
+import com.loc.newsapp.domain.manager.LocalUserManager
 
 class SaveAppEntry(
     private val localUserManger: LocalUserManager

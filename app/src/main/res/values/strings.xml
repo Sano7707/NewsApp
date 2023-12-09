@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">NewsApp</string>
+    <string name="First_Title">Israel-Hamas war live: Israeli army continues ‘pounding’ southern Gaza
+</string>
+
+    <string name="Second_Title">US and China to resume high-level military communication
+</string>
+
+    <string name="Third_Title">Armenia and Azerbaijan have agreed on basic peace treaty principles
+</string>
+
+    <string name="First_Description"> About 31 Palestinians have been killed in separate strikes that took place at the Nuseirat …
+
+</string>
+
+    <string name="Second_Description">US President Joe Biden and Chinese leader Xi Jinping have agreed to resume high-level …
+
+</string>
+
+    <string name="Third_Description">The two countries have been at odds for decades, most notably over the breakaway region of …
+
+</string>
 </resources>

@@ -1,17 +1,25 @@
 package com.loc.newsapp.di
 
 import android.app.Application
+import androidx.room.Room
+import com.loc.newsapp.data.local.NewsDao
+import com.loc.newsapp.data.local.NewsDatabase
+import com.loc.newsapp.data.local.NewsTypeConvertor
 import com.loc.newsapp.data.manager.LocalUserMangerImpl
-import com.loc.newsapp.data.manager.remote.NewsApi
-import com.loc.newsapp.data.manager.repository.NewsRepositoryImpl
-import com.loc.newsapp.domain.manager.repository.NewsRepository
-import com.loc.newsapp.domain.manager.usecases.app_entry.AppEntryUseCases
-import com.loc.newsapp.domain.manager.usecases.app_entry.ReadAppEntry
-import com.loc.newsapp.domain.manager.usecases.app_entry.SaveAppEntry
-import com.loc.newsapp.domain.manager.usecases.news.GetNews
-import com.loc.newsapp.domain.manager.usecases.news.NewsUseCases
-import com.loc.newsapp.domain.manager.usecases.news.SearchNews
-import com.loc.newsapp.domain.manager.manager.LocalUserManager
+import com.loc.newsapp.data.remote.NewsApi
+import com.loc.newsapp.data.repository.NewsRepositoryImpl
+import com.loc.newsapp.domain.manager.LocalUserManager
+import com.loc.newsapp.domain.repository.NewsRepository
+import com.loc.newsapp.domain.usecases.app_entry.AppEntryUseCases
+import com.loc.newsapp.domain.usecases.app_entry.ReadAppEntry
+import com.loc.newsapp.domain.usecases.app_entry.SaveAppEntry
+import com.loc.newsapp.domain.usecases.news.DeleteArticle
+import com.loc.newsapp.domain.usecases.news.GetArticle
+import com.loc.newsapp.domain.usecases.news.GetArticles
+import com.loc.newsapp.domain.usecases.news.GetNews
+import com.loc.newsapp.domain.usecases.news.NewsUseCases
+import com.loc.newsapp.domain.usecases.news.SearchNews
+import com.loc.newsapp.domain.usecases.news.UpsertArticle
 import com.loc.newsapp.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -34,10 +42,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideAppEntryUseCases(
-        localUserManger: LocalUserManager
+        localUserManger: LocalUserManager,
     ): AppEntryUseCases = AppEntryUseCases(
         readAppEntry = ReadAppEntry(localUserManger),
-        saveAppEntry = SaveAppEntry(localUserManger)
+        saveAppEntry = SaveAppEntry(localUserManger),
     )
 
     @Provides
@@ -54,20 +62,46 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNewsRepository(
-        newsApi: NewsApi
+        newsApi: NewsApi,
+        newsDao: NewsDao
     ): NewsRepository {
-        return NewsRepositoryImpl(newsApi)
+        return NewsRepositoryImpl(newsApi,newsDao)
     }
 
     @Provides
     @Singleton
     fun provideNewsUseCases(
-        newsRepository: NewsRepository
+        newsRepository: NewsRepository,
+        newsDao: NewsDao
     ): NewsUseCases {
         return NewsUseCases(
             getNews = GetNews(newsRepository),
-            searchNews = SearchNews(newsRepository)
+            searchNews = SearchNews(newsRepository),
+            upsertArticle = UpsertArticle(newsDao),
+            deleteArticle = DeleteArticle(newsDao),
+            getArticles = GetArticles(newsDao),
+            getArticle = GetArticle(newsDao)
         )
     }
+
+    @Provides
+    @Singleton
+    fun provideNewsDatabase(
+        application: Application
+    ): NewsDatabase {
+        return Room.databaseBuilder(
+            context = application,
+            klass = NewsDatabase::class.java,
+            name = "news_db"
+        ).addTypeConverter(NewsTypeConvertor())
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsDao(
+        newsDatabase: NewsDatabase
+    ): NewsDao = newsDatabase.newsDao
 
 }
