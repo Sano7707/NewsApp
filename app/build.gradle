@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'kotlin-parcelize'
+
 }
 
 android {
@@ -21,6 +23,11 @@ android {
             useSupportLibrary true
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
 
     buildTypes {
         release {
@@ -47,6 +54,7 @@ android {
         }
     }
 }
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.8.0'
