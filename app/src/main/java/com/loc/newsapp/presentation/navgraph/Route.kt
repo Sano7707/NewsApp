@@ -1,4 +1,5 @@
 package com.loc.newsapp.presentation.navgraph
+
 import androidx.navigation.NamedNavArgument
 
 sealed class Route(
