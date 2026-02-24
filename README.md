@@ -59,64 +59,67 @@ Perfect for learning or extending modern Android development practices with clea
 2. **Open in Android Studio**
  File → Open → Select the cloned folder
 
-3. **Add your API Key**
-Create a file local.properties in the project root
-Paste this line: ```bash properties NEWS_API_KEY=your_actual_api_key_here
+## 3. Add Your API Key
 
-4. **Sync & Run**
-  Click Sync Project with Gradle Files
-  Select a device/emulator (API 24+)
-  Click the Run button ▶
+1. Create a file named `local.properties` in the project root.
+2. Add the following line:
+
+NEWS_API_KEY=your_actual_api_key_here
+
+---
+
+## 4. Sync & Run
+
+1. Click **Sync Project with Gradle Files**.
+2. Select a device or emulator (**API 24+**).
+3. Click the **Run** button ▶.
 
 The app will automatically read the API key using BuildConfig.
 
-NewsApp/
-├── app/
-│   ├── src/main/
-│   │   ├── java/com/sano7707/newsapp/
-│   │   │   ├── data/              ← Remote API, Local DB, Models, Repository
-│   │   │   ├── di/                ← Hilt Modules
-│   │   │   ├── domain/            ← Use Cases, Models
-│   │   │   ├── presentation/      ← UI, ViewModels, Screens, Adapters
-│   │   │   ├── utils/             ← Extensions, Constants, Helpers
-│   │   │   └── NewsApplication.kt
-│   │   ├── res/
-│   │   │   ├── drawable/, layout/, values/, etc.
-│   │   └── AndroidManifest.xml
-│   └── build.gradle(.kts)
-├── gradle/
-├── build.gradle(.kts)             ← Project level
-├── settings.gradle(.kts)
-├── local.properties               ← (Git ignored - your API key)
-└── README.md
+---
 
-🏗 Architecture
-The app follows Clean Architecture principles:
+## 🏗 Architecture
 
-Presentation Layer → UI (Compose/XML) + ViewModel
-Domain Layer → Business logic & Use Cases
-Data Layer → Repository (Remote + Local)
+The app follows **Clean Architecture** principles:
 
-Flow: UI → ViewModel → UseCase → Repository → (API / Room) → back to UI via Flow/StateFlow.
+- Presentation Layer → UI (Compose/XML) + ViewModel  
+- Domain Layer → Business logic & Use Cases  
+- Data Layer → Repository (Remote + Local)
 
-📌 API Information
+Flow:  
+UI → ViewModel → UseCase → Repository → (API / Room) → back to UI via Flow/StateFlow.
 
-Base URL: https://newsapi.org/v2/
-Endpoint used: /top-headlines
-Country: us (can be changed)
-Categories supported: all 7 categories
+---
 
-🤝 Contributing
+## 📌 API Information
+
+- Base URL: https://newsapi.org/v2/
+- Endpoint used: /top-headlines
+- Country: us (can be changed)
+- Categories supported: All 7 categories
+
+---
+
+## 🤝 Contributing
+
 Contributions, issues, and feature requests are welcome!
 
-Fork the project
-Create your feature branch (git checkout -b feature/amazing-feature)
-Commit your changes (git commit -m 'Add amazing feature')
-Push to the branch (git push origin feature/amazing-feature)
-Open a Pull Request
+1. Fork the project  
+2. Create your feature branch  
+   git checkout -b feature/amazing-feature  
+3. Commit your changes  
+   git commit -m "Add amazing feature"  
+4. Push to the branch  
+   git push origin feature/amazing-feature  
+5. Open a Pull Request  
 
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+---
 
-Made with ❤️ by Sano7707
+## 📄 License
+
+This project is licensed under the MIT License — see the LICENSE file for details.
+
+---
+
+Made with ❤️ by **Sano7707**  
 If you found this project helpful, please give it a ⭐ on GitHub!
